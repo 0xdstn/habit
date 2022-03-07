@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>habits</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="manifest" href="manifest.json">
+    </head>
+    <body>
+        <header>
+            <h1>&#128202; habits</h1>
+        </header>
+
+        <div id="habits">
+            <table id="habit-container"></table>
+        </div>
+
+        <div id="settings">
+            <h2>Settings</h2>
+            <p><strong>Habits (comma separated emoji)</strong></p>
+            <input type="text" name="habits" id="habit-setting" />
+            <br><br>
+            <a href="#" id="clear">Clear selected habits</a>
+            <br><br>
+            <a href="#" id="close-settings">Close settings</a>
+        </div>
+
+        <div id="about">
+            <h2>About</h2>
+            <p>This tool was created with &#128153; by <a href="/~dustin/" target="_blank">~dustin</a>.</p>
+            <p>I wanted a simple tool to track habits, so I made this.</p>
+            <p>This is meant to be a weekly tool and doesn't keep history.</p>
+            <p>In the settings you provide a comma separated list of emoji, each of which represent a habit you want to track.</p>
+            <p>This site is a PWA, meaning you can install it to your device in Android and it will look and act like a native application.</p>
+            <p>You can find the source here: <a href="https://github.com/0xdstn/habits" target="_blank">github.com/0xdstn/habits</a></p>
+            <a href="#" id="close-about">Close about</a>
+        </div>
+
+        <footer>
+            <a href="#" id="open-settings">settings</a>
+            <a href="#" id="open-about">about</a>
+        </footer>
+
+        <script src="main.js"></script>
+    </body>
+</html>
