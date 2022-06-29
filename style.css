@@ -16,6 +16,10 @@ body {
     font-size: 14px;
 }
 
+body.modalOpen {
+    overflow: hidden;
+}
+
 a {
     color: #000;
 }
@@ -43,7 +47,7 @@ h1 {
     background: #fff;
     display: none;
     padding: 1em;
-    position: absolute;
+    position: fixed;
         top: 0;
         right: 0;
         bottom: 0;

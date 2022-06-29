@@ -1,4 +1,4 @@
-const cacheName = 'habits-v1';
+const cacheName = 'habits-v3';
 const appFiles = [
     '/~dustin/habits/',
     '/~dustin/habits/index.html',

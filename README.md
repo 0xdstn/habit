@@ -2,7 +2,7 @@
 
 This is a simple tool to track habits.
 
-This is meant to be a weekly tool and doesn't keep history.
+This is meant to be a monthly tool and doesn't keep history.
 
 In the settings you provide a comma separated list of emoji, each of which represent a habit you want to track.
 
