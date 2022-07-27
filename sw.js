@@ -1,10 +1,10 @@
-const cacheName = 'log-v4';
+const cacheName = 'habits-v3';
 const appFiles = [
-    '/~dustin/log/',
-    '/~dustin/log/index.html',
-    '/~dustin/log/main.js',
-    '/~dustin/log/style.css',
-    '/~dustin/log/icon-512.png'
+    '/~dustin/habits/',
+    '/~dustin/habits/index.html',
+    '/~dustin/habits/main.js',
+    '/~dustin/habits/style.css',
+    '/~dustin/habits/icon-512.png'
 ];
 
 self.addEventListener('install', (e) => {
