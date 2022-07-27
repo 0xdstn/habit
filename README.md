@@ -1,11 +1,11 @@
-# 📊 Habits
+# LOG
 
-This is a simple tool to track habits.
+I have used the official Bullet Journal Companion app for a long time now, and I have always wished I could turn off the 72 hour expiration of entries.
 
-This is meant to be a monthly tool and doesn't keep history.
+I know the intent with the 72 hour limit is to push you to transfer to your journal every day, but my life doesn't always lend to that.
 
-In the settings you provide a comma separated list of emoji, each of which represent a habit you want to track.
+You can add/edit notes, tasks, and events, and delete them when you're ready.
 
 This site is a PWA, meaning you can install it to your device in Android and it will look and act like a native application.
 
-Live version: [http://tilde.town/~dustin/habits/](http://tilde.town/~dustin/habits/)
+Live version: [http://tilde.town/~dustin/log/](http://tilde.town/~dustin/log/)

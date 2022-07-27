@@ -3,59 +3,29 @@ if('serviceWorker' in navigator) {
 };
 
 const body = document.getElementById('body');
-const settings = document.getElementById('settings');
-const openSettings = document.getElementById('open-settings');
-const closeSettings = document.getElementById('close-settings');
-const clear = document.getElementById('clear');
 const about = document.getElementById('about');
+const entriesRender = document.getElementById('entries');
 const openAbout = document.getElementById('open-about');
 const closeAbout = document.getElementById('close-about');
-const habitSetting = document.getElementById('habit-setting');
-const habitContainer = document.getElementById('habit-container');
+const entryInput = document.getElementById('entry');
+const glyphInput = document.getElementById('glyph');
+const saveButton = document.getElementById('save');
 
-const d = new Date();
-const days = Array.from({length: new Date(d.getFullYear(),d.getMonth()+1,0).getDate()}, (_, i) => (i + 1).toString());
-console.log('days',days);
-var habits = '💧,🥗,💪,🧘';
+const glyphs = {
+    '-' : 'note',
+    '.' : 'task',
+    'o' : 'event',
+    'x' : 'done'
+};
 
-var h = localStorage.getItem('habits');
-if(h !== null) {
-    habits = h;
-} else {
-    localStorage.setItem('habits', habits);
-    days.forEach(day => {
-        localStorage.setItem('habits-'+day,'');
-    });
+var editing = false;
+var editingIndex = null;
+
+var entries = '';
+var l = localStorage.getItem('log');
+if(l !== null) {
+    entries = l;
 }
-
-habitSetting.value = habits;
-
-habitSetting.addEventListener('change',function() {
-    habits = habitSetting.value;
-    localStorage.setItem('habits', habits);
-    renderHabits();
-});
-
-clear.addEventListener('click',function(e) {
-    e.preventDefault();
-    days.forEach(day => {
-        localStorage.setItem('habits-'+day,'');
-    });
-    renderHabits();
-    settings.classList.remove('open');
-});
-
-openSettings.addEventListener('click',function(e) {
-    e.preventDefault();
-    settings.classList.add('open');
-    body.classList.add('modalOpen');
-});
-
-closeSettings.addEventListener('click',function(e) {
-    e.preventDefault();
-    settings.classList.remove('open');
-    body.classList.remove('modalOpen');
-});
 
 openAbout.addEventListener('click',function(e) {
     e.preventDefault();
@@ -69,39 +39,66 @@ closeAbout.addEventListener('click',function(e) {
     body.classList.remove('modalOpen');
 });
 
-function renderHabits() {
-    var th = '';
-    habits.split(',').forEach(h => {
-        th += '<th>' + h + '</th>';
-    });
-    habitContainer.innerHTML = '<td>&nbsp;</td>' + th + '</tr>';
-    days.forEach(day => {
-        var selected = localStorage.getItem('habits-' + day);
-        var checkboxes = '';
-        habits.split(',').forEach(h => {
-            var checked = '';
-            if(selected.indexOf(h) !== -1) {
-                checked = ' checked="checked"';
-            }
-            checkboxes += '<td><input data-habit="' + h + '" data-day="' + day + '" type="checkbox"' + checked + ' /></td>';
+saveButton.addEventListener('click',function(e) {
+    e.preventDefault();
+    var newEntry = `${glyphInput.value} ${entryInput.value}`;
+    if(editing) {
+        var items = entries.split('|');
+        items[editingIndex] = newEntry;
+        entries = items.join('|');
+        editing = false;
+        editingIndex = null;
+    } else {
+        var sep = '|';
+        if(entries == '') {
+            sep = '';
+        }
+        entries += sep + newEntry;
+    }
+    localStorage.setItem('log',entries);
+    entryInput.value = '';
+    renderLogs();
+});
+
+function renderLogs() {
+    var out = '';
+
+    if(entries.length) {
+        var items = entries.split('|');
+
+        items.forEach((i,index) => {
+            var glyph = i[0];
+            var entry = i.substring(2);
+            out += `<a href="#" data-action="del" data-i="${index}">D</a> <a href="#"  data-action="edit" data-i="${index}">E</a> <span class="${glyphs[glyph]}">${glyph}</span> ${entry}<br>`;
         });
-        habitContainer.innerHTML  = habitContainer.innerHTML + '<tr><th>' + day + '</th>' + checkboxes + '</tr>';
-    });
-    habitContainer.innerHTML = habitContainer.innerHTML + '<td>&nbsp;</td>' + th + '</tr>';
+    }
 
-    document.querySelectorAll('input[type="checkbox"]').forEach(ch => {
-        ch.addEventListener('change',function(e){
-            const h = e.target.getAttribute('data-habit');
-            const lsKey = 'habits-' + e.target.getAttribute('data-day');
-            const selected = localStorage.getItem(lsKey);
+    entriesRender.innerHTML = out;
 
-            if(e.target.checked) {
-               localStorage.setItem(lsKey, selected + h);
-            } else {
-               localStorage.setItem(lsKey, selected.replace(h,''));
+    document.querySelectorAll('#entries a').forEach(btn => {
+        btn.addEventListener('click',function(e){
+            e.preventDefault();
+            console.log(e.target);
+            var action = e.target.getAttribute('data-action');
+            var i = e.target.getAttribute('data-i');
+
+            if(action == 'del') {
+                var items = entries.split('|');
+                items.splice(i,1);
+                entries = items.join('|');
+                localStorage.setItem('log',entries);
+                renderLogs();
+            } else if(action == 'edit') {
+                var items = entries.split('|');
+                var item = items[i];
+                var glyph = item[0];
+                var entry = item.substring(2);
+                entryInput.value = entry;
+                editing = true;
+                editingIndex = parseInt(i);
             }
         });
     });
 }
 
-renderHabits();
+renderLogs();
