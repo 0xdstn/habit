@@ -20,6 +20,9 @@
             <h2>Settings</h2>
             <p><strong>Habits (comma separated emoji)</strong></p>
             <input type="text" name="habits" id="habit-setting" />
+            <p><strong>Length</strong></p>
+            <label><input type="radio" checked="checked" id="monthly" name="length" value="M" /> Month</label>
+            <label><input type="radio" id="weekly" name="length" value="W" /> Week</label>
             <br><br>
             <a href="#" id="clear">Clear selected habits</a>
             <br><br>
@@ -30,7 +33,7 @@
             <h2>About</h2>
             <p>This tool was created with &#128153; by <a href="/~dustin/" target="_blank">~dustin</a>.</p>
             <p>I wanted a simple tool to track habits, so I made this.</p>
-            <p>This is meant to be a monthly tool and doesn't keep history.</p>
+            <p>This is meant to be a weekly or monthly tool and doesn't keep history.</p>
             <p>In the settings you provide a comma separated list of emoji, each of which represent a habit you want to track.</p>
             <p>This site is a PWA, meaning you can install it to your device in Android and it will look and act like a native application.</p>
             <p>You can find the source here: <a href="https://github.com/0xdstn/habits" target="_blank">github.com/0xdstn/habits</a></p>

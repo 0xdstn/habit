@@ -11,24 +11,35 @@ const about = document.getElementById('about');
 const openAbout = document.getElementById('open-about');
 const closeAbout = document.getElementById('close-about');
 const habitSetting = document.getElementById('habit-setting');
+const lengthMonth = document.getElementById('monthly');
+const lengthWeek = document.getElementById('weekly');
 const habitContainer = document.getElementById('habit-container');
 
 const d = new Date();
 const days = Array.from({length: new Date(d.getFullYear(),d.getMonth()+1,0).getDate()}, (_, i) => (i + 1).toString());
-console.log('days',days);
+const weekDays = ['MO','TU','WE','TH','FR','SA','SU'];
 var habits = '💧,🥗,💪,🧘';
+var length = 'M'
 
 var h = localStorage.getItem('habits');
 if(h !== null) {
     habits = h;
 } else {
     localStorage.setItem('habits', habits);
-    days.forEach(day => {
+    [...days,...weekDays].forEach(day => {
         localStorage.setItem('habits-'+day,'');
     });
 }
 
 habitSetting.value = habits;
+
+var l = localStorage.getItem('habits-length');
+if(l !== null) {
+    length = l;
+    if(length === 'W') {
+        lengthWeek.checked = true;
+    }
+}
 
 habitSetting.addEventListener('change',function() {
     habits = habitSetting.value;
@@ -36,9 +47,22 @@ habitSetting.addEventListener('change',function() {
     renderHabits();
 });
 
+lengthMonth.addEventListener('change',function(e) {
+    console.log(e);
+    localStorage.setItem('habits-length','M');
+    length = 'M';
+    renderHabits();
+});
+
+lengthWeek.addEventListener('change',function(e) {
+    localStorage.setItem('habits-length','W');
+    length = 'W';
+    renderHabits();
+});
+
 clear.addEventListener('click',function(e) {
     e.preventDefault();
-    days.forEach(day => {
+    [...days,...weekDays].forEach(day => {
         localStorage.setItem('habits-'+day,'');
     });
     renderHabits();
@@ -75,7 +99,11 @@ function renderHabits() {
         th += '<th>' + h + '</th>';
     });
     habitContainer.innerHTML = '<td>&nbsp;</td>' + th + '</tr>';
-    days.forEach(day => {
+    var curDays = [...days];
+    if(length === 'W') {
+        curDays = [...weekDays];
+    }
+    curDays.forEach(day => {
         var selected = localStorage.getItem('habits-' + day);
         var checkboxes = '';
         habits.split(',').forEach(h => {
