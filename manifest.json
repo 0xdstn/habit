@@ -9,8 +9,8 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/~dustin/habits/",
-  "scope": "/~dustin/habits/",
+  "start_url": "/habits/",
+  "scope": "/habits/",
   "display": "standalone",
   "theme_color": "#fff",
   "background_color": "#fff"

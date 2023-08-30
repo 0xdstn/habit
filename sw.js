@@ -1,10 +1,10 @@
-const cacheName = 'habits-v5';
+const cacheName = 'habits-v5a';
 const appFiles = [
-    '/~dustin/habits/',
-    '/~dustin/habits/index.html',
-    '/~dustin/habits/main.js',
-    '/~dustin/habits/style.css',
-    '/~dustin/habits/icon-512.png'
+    '/habits/',
+    '/habits/index.html',
+    '/habits/main.js',
+    '/habits/style.css',
+    '/habits/icon-512.png'
 ];
 
 self.addEventListener('install', (e) => {
