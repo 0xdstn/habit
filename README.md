@@ -8,4 +8,4 @@ In the settings you provide a comma separated list of emoji, each of which repre
 
 This site is a PWA, meaning you can install it to your device in Android and it will look and act like a native application.
 
-Live version: [https://0xdstn.site/habits/](https://0xdstn.site/habits/)
+Live version: [https://0xdstn.github.io/habits/](https://0xdstn.github.io/habits/)
